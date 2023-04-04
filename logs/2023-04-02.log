@@ -1,0 +1,2 @@
+time="2023-04-02 17:43:11" level=info msg="Error 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND `product`.`deleted_at` IS NULL LIMIT 15' at line 1"
+time="2023-04-02 17:43:48" level=info msg="Error 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near ') AND `product`.`deleted_at` IS NULL LIMIT 2' at line 1"
