@@ -1,0 +1,4 @@
+time="2023-04-04 18:15:00" level=info msg="err: Error 1054 (42S22): Unknown column 'address.product_id' in 'field list'"
+time="2023-04-04 18:17:37" level=info msg="err: record not found"
+time="2023-04-04 18:18:04" level=info msg="err: record not found"
+time="2023-04-04 18:18:35" level=info msg="err: record not found"

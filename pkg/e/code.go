@@ -18,4 +18,9 @@ const (
 	ErrorProductImgUpload = 40001
 
 	ErrorFavoriteExist = 50001
+
+	ErrorAddressNotExist = 60001
+
+	ErrorInsufficientFund = 70001
+	ErrorOutOfStock       = 70002
 )

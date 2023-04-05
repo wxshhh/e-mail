@@ -18,6 +18,11 @@ var MsgFlags = map[int]string{
 	ErrorProductImgUpload: "图片上传失败",
 
 	ErrorFavoriteExist: "已收藏",
+
+	ErrorAddressNotExist: "地址不存在",
+
+	ErrorInsufficientFund: "用户金额不足",
+	ErrorOutOfStock:       "商品库存不足",
 }
 
 // GetMsg 获取状态码对应的信息

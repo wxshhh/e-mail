@@ -3,7 +3,8 @@ package cache
 import "strconv"
 
 const (
-	RankKey = "rank"
+	RankKey      = "rank"
+	OrderTimeKey = "OrderTime"
 )
 
 func ProductViewKey(id uint) string {

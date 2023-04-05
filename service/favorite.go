@@ -23,7 +23,6 @@ func (service *FavoriteService) Create(ctx context.Context, uid uint) serializer
 	if exist {
 		code = e.ErrorFavoriteExist
 		return serializer.ErrorByCode(code, err)
-
 	}
 	userDao := dao.NewUserDao(ctx)
 	user, err := userDao.GetUserByID(uid)
@@ -68,7 +67,7 @@ func (service *FavoriteService) List(ctx context.Context, uid uint) serializer.R
 		code = e.Error
 		return serializer.ErrorByCode(code, err)
 	}
-	return serializer.BuildListResponse(serializer.BuildFavorites(favorites), uint(len(favorites)))
+	return serializer.BuildListResponse(serializer.BuildFavorites(ctx, favorites), uint(len(favorites)))
 }
 
 func (service *FavoriteService) Delete(ctx context.Context, uid uint, id uint) serializer.Response {

@@ -1,6 +1,9 @@
 package serializer
 
 import (
+	"context"
+	"gin_mall/conf"
+	"gin_mall/dao"
 	"gin_mall/model"
 )
 
@@ -20,28 +23,38 @@ type Favorite struct {
 	CreateAt      int64  `json:"create_at"`
 }
 
-func BuildFavorite(item *model.Favorite) Favorite {
+func BuildFavorite(favorite *model.Favorite, product *model.Product, boss *model.User) Favorite {
 	return Favorite{
-		UserID:        item.UserID,
-		ProductID:     item.ProductID,
-		Name:          item.Product.Name,
-		CategoryID:    item.Product.CategoryID,
-		Title:         item.Product.Title,
-		Info:          item.Product.Info,
-		ImagePath:     item.Product.ImgPath,
-		Price:         item.Product.Price,
-		DiscountPrice: item.Product.DiscountPrice,
-		BossID:        item.BossID,
-		Num:           item.Product.Num,
-		OnSale:        item.Product.OnSale,
-		CreateAt:      item.CreatedAt.Unix(),
+		UserID:        favorite.UserID,
+		ProductID:     favorite.ProductID,
+		Name:          product.Name,
+		CategoryID:    product.CategoryID,
+		Title:         product.Title,
+		Info:          product.Info,
+		ImagePath:     conf.Host + conf.HttpPort + conf.ProductPath + product.ImgPath,
+		Price:         product.Price,
+		DiscountPrice: product.DiscountPrice,
+		BossID:        boss.ID,
+		Num:           product.Num,
+		OnSale:        product.OnSale,
+		CreateAt:      favorite.CreatedAt.Unix(),
 	}
 }
 
-func BuildFavorites(items []*model.Favorite) []Favorite {
+func BuildFavorites(ctx context.Context, items []*model.Favorite) []Favorite {
 	var favorites []Favorite
+	productDao := dao.NewProductDao(ctx)
+	bossDao := dao.NewUserDao(ctx)
 	for _, item := range items {
-		favorites = append(favorites, BuildFavorite(item))
+		product, err := productDao.GetProductByID(item.ProductID)
+		if err != nil {
+			continue
+		}
+		boss, err := bossDao.GetUserByID(item.BossID)
+		if err != nil {
+			continue
+		}
+		favorites = append(favorites, BuildFavorite(item, product, boss))
 	}
 	return favorites
 }
